@@ -1,1 +1,1 @@
-# Tarea-3_RNA
+# Tarea-3_RNA. Funciones y Ecuaciones Diferenciales
