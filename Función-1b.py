@@ -13,8 +13,8 @@ x = tf.linspace(-1,1,500)
 y = 1+(2*x)+(4*(x**3)) #Funcion a reproducir
 
 model = Sequential()
-model.add(Dense(20, activation='tanh',input_shape=(1,)))
-model.add(Dense(20, activation ='tanh'))
+model.add(Dense(20, activation='relu',input_shape=(1,)))
+model.add(Dense(20, activation ='relu'))
 model.add(Dense(1, activation = 'linear'))
 
 model.summary()
@@ -24,7 +24,7 @@ model.compile(optimizer=RMSprop(),loss='mse')
 history = model.fit(x,y,epochs=500,batch_size=10)
 
 f = model.predict(x)
-plt.plot(x,f,label='$f(x)$ de la red',color = 'b')
+plt.plot(x,f,label='$f(x)$ de la red',color = 'k')
 plt.plot(x,y,label='$f(x)$',color = 'r',ls='--')
 plt.grid()
 plt.legend()
