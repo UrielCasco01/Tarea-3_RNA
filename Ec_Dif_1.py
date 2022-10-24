@@ -18,6 +18,7 @@ class EDOsol(Sequential):
     
     def train_step(self, data):
         batch_size = tf.shape(data)[0]
+        #El dominio de la función es de [-5,5]
         x = tf.random.uniform((batch_size,1), minval= -5 , maxval= 5)
         
         with tf.GradientTape() as tape:
@@ -28,7 +29,7 @@ class EDOsol(Sequential):
             dy = tape2.gradient(y_pred, x)
             x0 = tf.zeros((batch_size, 1))
             y0 = self(x0, training=True)
-            eq = x*dy+y_pred-(x**2)*tf.cos(x)
+            eq = x*dy+y_pred-(x**2)*tf.cos(x) #Ecuación diferencial 
             ic = y_pred
             loss = keras.losses.mean_squared_error(0., eq) + keras.losses.mean_squared_error(0., ic)
             
@@ -56,14 +57,15 @@ x_testv = tf.linspace(-5,5,500)
 a = model.predict(x_testv)
 plt.plot(x_testv, a, label= "Solución de la red")
 plt.plot(x_testv, ((((x**2)-2)*tf.sin(x))/x) + 2*tf.cos(x), label= "Solución analítica")
+plt.grid()
 plt.legend()
 plt.title("Soluciones de la ecuación diferencial (Solución de la red VS Solución Analítica)")
 plt.show()
 exit()
 
-model.save("red1_T3.h5") 
+model.save("red2a_T3.h5") 
 
-modelo_cargado = tf.keras.models.load_model("red1_T3.h5")            
+modelo_cargado = tf.keras.models.load_model("red2a_T3.h5")            
         
         
         
